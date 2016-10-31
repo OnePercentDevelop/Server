@@ -47,7 +47,7 @@ public class HomeController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "home";
+		return "test";
 	}
 
 	@RequestMapping(value = "calendar.do", method = RequestMethod.GET)
@@ -59,6 +59,16 @@ public class HomeController {
 	public String timer(Locale locale, Model model) {
 
 		return "timer";
+	}
+	@RequestMapping(value = "timer2.do", method = RequestMethod.GET)
+	public String timer2(Locale locale, Model model) {
+
+		return "demo";
+	}
+	@RequestMapping(value = "rotatingcard.do", method = RequestMethod.GET)
+	public String rotating(Locale locale, Model model) {
+
+		return "rotatingcard";
 	}
 	// main data
 	@RequestMapping(value = "/main.do")
