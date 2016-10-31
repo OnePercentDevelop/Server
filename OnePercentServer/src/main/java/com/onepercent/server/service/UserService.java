@@ -19,7 +19,11 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return "onepercent";
 	}
-
+	
+	//id에 해당하는 password가져오기
+	public String selectUserPassword(Map<String, Object> commandMap) throws Exception {
+		return dao.selectUserPassword(commandMap);
+	}
 	// user 전체 출력
 	public List<Map<String, Object>> selectUserList(Map<String, Object> Map) throws Exception {
 		return dao.selectUserList(Map);

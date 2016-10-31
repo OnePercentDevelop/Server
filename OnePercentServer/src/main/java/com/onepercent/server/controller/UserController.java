@@ -1,5 +1,6 @@
 package com.onepercent.server.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,27 @@ public class UserController {
 		mv.addObject("user_list", list);
 		return mv;
 	}
-	
+	// login check
+		@RequestMapping("/login.do")
+		public ModelAndView loginCheck(HttpServletRequest request) throws Exception {
+			String user_id = request.getParameter("user_id");
+			String user_password = request.getParameter("user_password");
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("user_id", user_id);
+			String check_password = service.selectUserPassword(map);
+			ModelAndView mv = new ModelAndView("jsonView");
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+			Map<String, Object> list_map = new HashMap<String, Object>();
+			if (user_password.equals(check_password)) {
+				list_map.put("state", "ok");
+
+			} else {
+				list_map.put("state", "fail");
+			}
+			list.add(list_map);
+			mv.addObject("login_result", list);
+			return mv;
+		}
 	//user insert
 	@RequestMapping("/insertUser.do")
 	public void userInput(HttpServletRequest request) throws Exception {
