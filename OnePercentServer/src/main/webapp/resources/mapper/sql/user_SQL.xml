@@ -3,12 +3,12 @@
 
 <mapper namespace="sample">
 	
-	<select id="selectMemberList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectUserList" parameterType="hashmap" resultType="hashmap">
 		<![CDATA[
 			SELECT
 			    *
 			FROM
-			   user
+			   OnePercentUser
 		]]>
 	</select>
 	<select id="selectAccessList" parameterType="hashmap" resultType="hashmap">
@@ -56,20 +56,20 @@
 		]]>
 	</select>
 	
-	<insert id="insertMember" parameterType="hashmap">
+	<insert id="insertUser" parameterType="hashmap">
 		<![CDATA[
-			INSERT IGNORE 
-				INTO user(
-			    	id,
-			    	name,
-			    	register_id,
-			    	signup_date
+			INSERT  
+				INTO OnePercentUser(
+			    	user_id,
+			    	user_password,
+			    	sign_date,
+			    	user_token
 			    	)
 				VALUES(
-					#{id},
-			    	#{name},
-			    	#{register_id},
-			    	#{date}
+					#{user_id},
+			    	#{user_password},
+			    	#{sign_date},
+			    	#{user_token}
 			    )
 		]]>
 	</insert>	
@@ -143,12 +143,12 @@
 				access_date=#{access_date} 
 		]]>
 	</update>
-	<delete id="deleteMember" parameterType="hashmap">
+	<delete id="deleteUser" parameterType="hashmap">
 		<![CDATA[
 			DELETE FROM
-				user
+				OnePercentUser
 			WHERE
-				id=#{id}
+				user_id=#{user_id}
 		]]>
 	</delete>	
 	

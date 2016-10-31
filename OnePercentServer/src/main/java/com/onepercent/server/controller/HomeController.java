@@ -1,4 +1,4 @@
-package com.onepercent.server;
+package com.onepercent.server.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,26 +50,7 @@ public class HomeController {
 		return "test";
 	}
 
-	@RequestMapping(value = "calendar.do", method = RequestMethod.GET)
-	public String calendar(Locale locale, Model model) {
 
-		return "calendar";
-	}
-	@RequestMapping(value = "timer.do", method = RequestMethod.GET)
-	public String timer(Locale locale, Model model) {
-
-		return "timer";
-	}
-	@RequestMapping(value = "timer2.do", method = RequestMethod.GET)
-	public String timer2(Locale locale, Model model) {
-
-		return "demo";
-	}
-	@RequestMapping(value = "rotatingcard.do", method = RequestMethod.GET)
-	public String rotating(Locale locale, Model model) {
-
-		return "rotatingcard";
-	}
 	// main data
 	@RequestMapping(value = "/main.do")
 	public ModelAndView main(HttpServletRequest request) throws Exception {
@@ -89,10 +70,11 @@ public class HomeController {
 		String winner_str = winnerRead(today);
 		String gift_str = giftRead(today);
 		map.put("today", today);
-		map.put("gift", gift_str);
+		map.put("gift_name", gift_str);
 		map.put("question", question_str[0]);
 		map.put("example", example_list);
 		map.put("winner", winner_str);
+		map.put("gift_png", "banana.png");
 		list.add(map);
 		mv.addObject("main_result", list);
 		return mv;
@@ -110,7 +92,7 @@ public class HomeController {
 	public String giftRead(String today) throws IOException {
 		String result = "";
 		String test = "";
-		File file = new File("C://onepercent/main/gift/"+today+"gift.txt");
+		File file = new File("D://home/temp/onepercent/main/gift/"+today+"gift.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				new FileInputStream(file), "utf-8"));
 		while ((test = br.readLine()) != null){
@@ -120,13 +102,12 @@ public class HomeController {
 		return result;
 	}
 	public String[] questionRead(String today) throws IOException {
-		File file = new File("C://onepercent/main/question/"+today+"question.txt");
+		File file = new File("D://home/temp/onepercent/main/question/"+today+"question.txt");
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				new FileInputStream(file), "utf-8"));
         String data[] = new String[6];
         int cnt = 0;
-        // readLine 사용해 한 라인씩 읽어들인다
         while ((data[cnt] = br.readLine()) != null){
         	cnt++;
         }
@@ -136,7 +117,7 @@ public class HomeController {
 	public String winnerRead(String today) throws IOException {
 		String result = "";
 		String test = "";
-		File file = new File("C://onepercent/main/winner/"+today+"winner.txt");
+		File file = new File("D://home/temp/onepercent/main/winner/"+today+"winner.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				new FileInputStream(file), "utf-8"));
 		while ((test = br.readLine()) != null){
