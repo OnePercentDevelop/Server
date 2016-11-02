@@ -19,8 +19,8 @@ public class UserDao extends abDAO{
 	public List<Map<String, Object>> selectUserList(Map<String, Object> commandMap) {
 		return (List<Map<String,Object>>)selectList("sample.selectUserList", commandMap);
 	}
-	public void insertUser(Map<String, Object> map) {
-		insert("sample.insertUser", map);
+	public int insertUser(Map<String, Object> map) {
+		return (Integer)insert("sample.insertUser", map);
 	}
 	public void deleteUser(Map<String, Object> map) {
 		delete("sample.deleteUser",map);

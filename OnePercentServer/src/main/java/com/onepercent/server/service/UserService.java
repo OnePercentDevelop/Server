@@ -30,8 +30,8 @@ public class UserService {
 	}
 
 	// user 한명 insert
-	public void insertUser(Map<String, Object> map) {
-		dao.insertUser(map);
+	public int insertUser(Map<String, Object> map) {
+		return dao.insertUser(map);
 	}
 
 	// user 한명 delete

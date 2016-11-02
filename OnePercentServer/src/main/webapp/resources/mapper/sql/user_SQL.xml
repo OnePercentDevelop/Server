@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="sample">
-	<select id="selectUserPassword" parameterType="hashmap" resultType="String">
+	<select id="selectUserPassword" parameterType="hashmap"
+		resultType="String">
 		<![CDATA[
 			SELECT
 			    user_password
@@ -20,7 +21,8 @@
 			   OnePercentUser
 		]]>
 	</select>
-	<select id="selectAccessList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectAccessList" parameterType="hashmap"
+		resultType="hashmap">
 		<![CDATA[
 			SELECT
 			    *
@@ -28,7 +30,8 @@
 			   access_tb
 		]]>
 	</select>
-	<select id="selectLetterList" parameterType="hashmap" resultType="hashmap">
+	<select id="selectLetterList" parameterType="hashmap"
+		resultType="hashmap">
 		<![CDATA[
 			SELECT
 			    *
@@ -36,7 +39,8 @@
 			   letter_tb
 		]]>
 	</select>
-	<select id="selectFindLetter" parameterType="hashmap" resultType="hashmap">
+	<select id="selectFindLetter" parameterType="hashmap"
+		resultType="hashmap">
 		<![CDATA[
 			SELECT
 			    *
@@ -54,7 +58,8 @@
 			   letter_tb
 		]]>
 	</select>
-	<select id="selectFindRegister" parameterType="String" resultType="String">
+	<select id="selectFindRegister" parameterType="String"
+		resultType="String">
 		<![CDATA[
 			SELECT
 			    register_id
@@ -64,10 +69,20 @@
 				id=#{to_id}
 		]]>
 	</select>
-	
+
 	<insert id="insertUser" parameterType="hashmap">
 		<![CDATA[
-			INSERT  
+	    	IF EXISTS(
+                SELECT user_id FROM OnePercentUser
+                WHERE user_id = #{user_id}
+         	)
+    	BEGIN
+        	SELECT 99 cnt
+    	END
+    
+    	ELSE
+        	BEGIN
+        	INSERT  
 				INTO OnePercentUser(
 			    	user_id,
 			    	user_password,
@@ -80,9 +95,10 @@
 			    	#{sign_date},
 			    	#{user_token}
 			    )
+       	END
 		]]>
-	</insert>	
-	
+	</insert>
+
 	<insert id="accessMember" parameterType="hashmap">
 		<![CDATA[
 			INSERT 
@@ -98,7 +114,7 @@
 			    )
 		]]>
 	</insert>
-	
+
 	<insert id="insertLetter" parameterType="hashmap">
 		<![CDATA[
 			INSERT
@@ -127,8 +143,8 @@
 			    	#{date}
 			    )
 		]]>
-	</insert>	
-	
+	</insert>
+
 	<update id="updateLetterState" parameterType="hashmap">
 		<![CDATA[
 			UPDATE
@@ -138,8 +154,8 @@
 			WHERE
 				letter_id=#{letter_id}
 		]]>
-	</update>	
-	
+	</update>
+
 	<update id="closeUser" parameterType="hashmap">
 		<![CDATA[
 			UPDATE
@@ -159,8 +175,8 @@
 			WHERE
 				user_id=#{user_id}
 		]]>
-	</delete>	
-	
+	</delete>
+
 	<delete id="deleteLetter" parameterType="hashmap">
 		<![CDATA[
 			DELETE FROM
@@ -169,7 +185,7 @@
 				letter_id=#{letter_id}
 		]]>
 	</delete>
-	
+
 	<delete id="deleteAccess" parameterType="hashmap">
 		<![CDATA[
 			DELETE FROM
@@ -177,11 +193,11 @@
 			WHERE
 				number=#{number}
 		]]>
-	</delete>	
-	
-	
-	
-	
-	
-	
+	</delete>
+
+
+
+
+
+
 </mapper>

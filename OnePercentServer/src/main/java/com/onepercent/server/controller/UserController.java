@@ -38,7 +38,7 @@ public class UserController {
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 			Map<String, Object> list_map = new HashMap<String, Object>();
 			if (user_password.equals(check_password)) {
-				list_map.put("state", "ok");
+				list_map.put("state", "success");
 
 			} else {
 				list_map.put("state", "fail");
@@ -49,7 +49,7 @@ public class UserController {
 		}
 	//user insert
 	@RequestMapping("/insertUser.do")
-	public void userInput(HttpServletRequest request) throws Exception {
+	public ModelAndView userInput(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("EUC-KR");
 		Map<String, Object> map = new HashMap<String, Object>();
 		String user_id = request.getParameter("user_id");
@@ -62,7 +62,21 @@ public class UserController {
 		map.put("user_password", user_password);
 		map.put("user_token", user_token);
 		map.put("sign_date", sign_date);
-		service.insertUser(map);
+		int signup_state = service.insertUser(map);
+		
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> list_map = new HashMap<String, Object>();
+		System.out.println(signup_state);
+		if (signup_state==1) {
+			list_map.put("state", "success");
+
+		} else {
+			list_map.put("state", "fail");
+		}
+		list.add(list_map);
+		mv.addObject("sign_result", list);
+		return mv;
 	}
 	// delete user
 		@RequestMapping("/userDelete.do")
