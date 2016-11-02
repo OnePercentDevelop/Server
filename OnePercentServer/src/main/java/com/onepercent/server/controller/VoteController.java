@@ -39,7 +39,7 @@ public class VoteController {
 		mv.addObject("uservote_list", list);
 		return mv;
 	}
-	// 사용자 투표 내역 가져오기
+	// 현재 투표자 수 가져오기
 		@RequestMapping(value = "/voteNumber.do")
 		public ModelAndView getVoteNumber(HttpServletRequest request) throws Exception {
 			String vote_date = request.getParameter("vote_date");
