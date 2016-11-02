@@ -58,7 +58,11 @@ public class HomeController {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
 		Date date = new Date();
-		String today = 1900+date.getYear()+"" + (date.getMonth()+1)+""+date.getDate();
+		/************************ 실제로 배포할 때 이부분 사용 ******************************/
+//		String today = 1900+date.getYear()+"" + (date.getMonth()+1)+""+date.getDate();
+		/***************************************************************************/
+		
+		String today = "20161102";
 		String question_str[] = questionRead(today);
 		List<Map<String, String>> example_list = new ArrayList<Map<String, String>>();
 		Map<String, String> example_map = new HashMap<String, String>();
