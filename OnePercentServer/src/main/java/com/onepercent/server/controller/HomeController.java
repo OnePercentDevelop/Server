@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -25,29 +26,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.onepercent.server.service.VoteService;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
-
+	@Resource(name = "VoteService")
+	private VoteService voteService;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "home.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model) throws Exception {
 		logger.info("Welcome home! The client locale is {}.", locale);
-
+		Map<String, Object> map = new HashMap<String, Object>();
 		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		String vote_date = "";
+		int year = 1900+date.getYear();
+		int month = date.getMonth()+1;
+		int day = date.getDate();
+		vote_date = ""+year+"년";
+		vote_date += month/10 > 0 ? ""+month+"월" : "0"+month+"월";
+		vote_date += day/10 > 0 ? ""+day+"일" : "0"+day+"일";
+		map.put("vote_date", vote_date);
+		List<Map<String, Object>> list = voteService.selectVoteNumber(map);
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+//
+//		String formattedDate = dateFormat.format(date);
 
-		String formattedDate = dateFormat.format(date);
+		model.addAttribute("result", list);
 
-		model.addAttribute("serverTime", formattedDate);
-
-		return "test";
+		return "overview";
 	}
 
 

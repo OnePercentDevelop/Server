@@ -43,10 +43,13 @@ public class VoteController {
 		@RequestMapping(value = "/voteNumber.do")
 		public ModelAndView getVoteNumber(HttpServletRequest request) throws Exception {
 			String vote_date = request.getParameter("vote_date");
+			request.setCharacterEncoding("EUC-KR");
+			System.out.println("vote_date : " + vote_date);
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("vote_date", vote_date);
 			ModelAndView mv = new ModelAndView("jsonView");
 			List<Map<String, Object>> list = voteService.selectVoteNumber(map);
+			list.get(0).put("test", "hello");
 			mv.addObject("vote_result", list);
 			return mv;
 		}

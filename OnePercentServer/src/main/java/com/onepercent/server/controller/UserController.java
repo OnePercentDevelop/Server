@@ -22,7 +22,7 @@ public class UserController {
 	// user list display
 	@RequestMapping(value = "/userList.do")
 	public ModelAndView userList(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("userList");
+		ModelAndView mv = new ModelAndView("bootstrap-table");
 		List<Map<String, Object>> list = service.selectUserList(commandMap);
 		mv.addObject("user_list", list);
 		return mv;
