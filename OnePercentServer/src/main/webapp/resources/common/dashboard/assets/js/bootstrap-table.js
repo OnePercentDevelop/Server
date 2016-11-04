@@ -220,10 +220,10 @@
         this.$el_ = this.$el.clone();
         this.timeoutId_ = 0;
         this.timeoutFooter_ = 0;
-
+        
         this.init();
     };
-
+    
     BootstrapTable.DEFAULTS = {
         classes: 'table table-hover',
         locale: undefined,
@@ -493,7 +493,7 @@
         this.initBody();
         this.initServer();
     };
-
+    
     BootstrapTable.prototype.initLocale = function () {
         if (this.options.locale) {
             var parts = this.options.locale.split(/-|_/);
@@ -1554,6 +1554,7 @@
         });
 
         this.$body.find('> tr[data-index] > td > .detail-icon').off('click').on('click', function () {
+        	
             var $this = $(this),
                 $tr = $this.parent().parent(),
                 index = $tr.data('index'),
@@ -1578,7 +1579,6 @@
         this.$selectItem = this.$body.find(sprintf('[name="%s"]', this.options.selectItemName));
         this.$selectItem.off('click').on('click', function (event) {
             event.stopImmediatePropagation();
-
             var checked = $(this).prop('checked'),
                 row = that.data[$(this).data('index')];
 
@@ -1596,6 +1596,7 @@
         });
 
         $.each(this.header.events, function (i, events) {
+        	
             if (!events) {
                 return;
             }
@@ -1610,7 +1611,7 @@
             if (that.options.detailView && !that.options.cardView) {
                 fieldIndex += 1;
             }
-
+            // table에서 delete버튼을 클릭하였을 경우 들어오는 부분!!!
             for (var key in events) {
                 that.$body.find('tr').each(function () {
                     var $tr = $(this),
@@ -1619,18 +1620,30 @@
                         name = key.substring(0, index),
                         el = key.substring(index + 1),
                         func = events[key];
-
+                    	
                     $td.find(el).off(name).on(name, function (e) {
                         var index = $tr.data('index'),
                             row = that.data[index],
                             value = row[field];
-
                         func.apply(this, [e, value, row, index]);
+                        /***************사용자 삭제!!********************/
+                    	var query = {
+        				user_id : row.id
+                    	};
+	        			$.ajax({
+	        				type : "POST",
+	        				url : "userDelete.do",
+	        				data : query,
+	        				success : function(data) {
+	        					alert(data);
+	        				}
+	        			});
+	        			/**********************************************/
                     });
                 });
             }
+            
         });
-
         this.updateSelected();
         this.resetView();
 
@@ -1724,6 +1737,7 @@
     };
 
     BootstrapTable.prototype.updateSelected = function () {
+    	
         var checkAll = this.$selectItem.filter(':enabled').length ===
             this.$selectItem.filter(':enabled').filter(':checked').length;
 
@@ -1733,6 +1747,20 @@
             $(this).parents('tr')[$(this).prop('checked') ? 'addClass' : 'removeClass']('selected');
         });
     };
+    BootstrapTable.prototype.deleteUser = function() {
+    	alert("ee");
+//    	var query = {
+//				user_id : user_id
+//			};
+//			$.ajax({
+//				type : "GET",
+//				url : "deleteUser.do",
+//				data : query,
+//				success : function(data) {
+//					alert(data);
+//				}
+//			});
+    }
 
     BootstrapTable.prototype.updateRows = function () {
         var that = this;
@@ -2265,7 +2293,6 @@
         if (!obj.hasOwnProperty('field') || !obj.hasOwnProperty('values')) {
             return;
         }
-
         var that = this,
             rows = [];
         $.each(this.options.data, function (index, row) {

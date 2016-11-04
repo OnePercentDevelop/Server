@@ -84,14 +84,15 @@ public class UserController {
 
 	// delete user
 	@RequestMapping("/userDelete.do")
-	public ModelAndView userDelete(HttpServletRequest request, Map<String, Object> commandMap) throws Exception {
+	public void userDelete(HttpServletRequest request, Map<String, Object> commandMap) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String user_id = request.getParameter("user_id");
+		System.out.println("user_id : " +user_id);
 		map.put("user_id", user_id);
 		service.deleteUser(map);
-		ModelAndView mv = new ModelAndView("userList");
-		List<Map<String, Object>> list = service.selectUserList(commandMap);
-		mv.addObject("user_list", list);
-		return mv;
+//		ModelAndView mv = new ModelAndView("userList");
+//		List<Map<String, Object>> list = service.selectUserList(commandMap);
+//		mv.addObject("user_list", list);
+//		return mv;
 	}
 }

@@ -406,6 +406,7 @@
 	                },
 	                'click .remove': function (e, value, row, index) {
 	                    console.log(row);
+	                    
 	                    $table.bootstrapTable('remove', {
 	                        field: 'id',
 	                        values: [row.id]
