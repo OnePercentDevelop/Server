@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<%String server = "/OnePercentServer"; %>
 <meta charset="UTF-8" />
 <link rel="apple-touch-icon" sizes="76x76"
 	href="resources/common/dashboard/assets/img/apple-icon.png">
@@ -52,11 +53,11 @@
 			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 		-->
 			<div class="logo">
-				<a href="http://www.creative-tim.com" class="simple-text">
-					1% </a>
+				<a href="<%=server %>/home.do" class="simple-text">
+					1Percent </a>
 			</div>
 			<div class="logo logo-mini">
-				<a href="http://www.creative-tim.com" class="simple-text"> Ct </a>
+				<a href="<%=server %>/home.do" class="simple-text"> 1% </a>
 			</div>
 			<div class="sidebar-wrapper">
 				<div class="user">
@@ -85,91 +86,28 @@
 					</a>
 						<div class="collapse" id="dashboardOverview">
 							<ul class="nav">
-								<li><a href="../dashboard/overview.html">Overview</a></li>
-								<li><a href="../dashboard/stats.html">Stats</a></li>
+								<li><a href="<%=server %>/home.do">현황판</a></li>
+								<li><a href="#">Stats</a></li>
 							</ul>
 						</div></li>
-					<li><a data-toggle="collapse" href="#componentsExamples">
-							<i class="ti-package"></i>
-							<p>
-								Components <b class="caret"></b>
-							</p>
-					</a>
-						<div class="collapse" id="componentsExamples">
-							<ul class="nav">
-								<li><a href="../components/buttons.html">Buttons</a></li>
-								<li><a href="../components/grid.html">Grid System</a></li>
-								<li><a href="../components/panels.html">Panels</a></li>
-								<li><a href="../components/sweet-alert.html">Sweet
-										Alert</a></li>
-								<li><a href="../components/notifications.html">Notifications</a></li>
-								<li><a href="../components/icons.html">Icons</a></li>
-								<li><a href="../components/typography.html">Typography</a></li>
-							</ul>
-						</div></li>
-					<li><a data-toggle="collapse" href="#formsExamples"> <i
-							class="ti-clipboard"></i>
-							<p>
-								Forms <b class="caret"></b>
-							</p>
-					</a>
-						<div class="collapse" id="formsExamples">
-							<ul class="nav">
-								<li><a href="../forms/regular.html">Regular Forms</a></li>
-								<li><a href="../forms/extended.html">Extended Forms</a></li>
-								<li><a href="../forms/validation.html">Validation Forms</a></li>
-								<li><a href="../forms/wizard.html">Wizard</a></li>
-							</ul>
-						</div></li>
+					
 					<li class="active"><a data-toggle="collapse"
 						href="#tablesExamples"> <i class="ti-view-list-alt"></i>
 							<p>
-								Table list <b class="caret"></b>
+								목록 보기<b class="caret"></b>
 							</p>
 					</a>
 						<div class="collapse in" id="tablesExamples">
 							<ul class="nav">
-								<li><a href="regular.html">Regular Tables</a></li>
-								<li><a href="extended.html">Extended Tables</a></li>
-								<li class="active"><a href="bootstrap-table.html">Bootstrap
-										Table</a></li>
-								<li><a href="datatables.net.html">DataTables.net</a></li>
+								<li class="active"><a href="<%=server %>/userList.do">사용자 목록</a></li>
+								<li><a href="<%=server %>/voteList.do">투표 목록</a></li>
 							</ul>
 						</div></li>
-					<li><a data-toggle="collapse" href="#mapsExamples"> <i
-							class="ti-map"></i>
-							<p>
-								Maps <b class="caret"></b>
-							</p>
-					</a>
-						<div class="collapse" id="mapsExamples">
-							<ul class="nav">
-								<li><a href="../maps/google.html">Google Maps</a></li>
-								<li><a href="../maps/vector.html">Vector maps</a></li>
-								<li><a href="../maps/fullscreen.html">Full Screen Map</a></li>
-							</ul>
-						</div></li>
-					<li><a href="../charts.html"> <i class="ti-bar-chart-alt"></i>
-							<p>Charts</p>
-					</a></li>
-					<li><a href="../calendar.html"> <i class="ti-calendar"></i>
+					
+					<li><a href="<%=server %>/calendar.do"> <i class="ti-calendar"></i>
 							<p>Calendar</p>
 					</a></li>
-					<li><a data-toggle="collapse" href="#pagesExamples"> <i
-							class="ti-gift"></i>
-							<p>
-								Pages <b class="caret"></b>
-							</p>
-					</a>
-						<div class="collapse" id="pagesExamples">
-							<ul class="nav">
-								<li><a href="../pages/timeline.html">Timeline Page</a></li>
-								<li><a href="../pages/user.html">User Page</a></li>
-								<li><a href="../pages/login.html">Login Page</a></li>
-								<li><a href="../pages/register.html">Register Page</a></li>
-								<li><a href="../pages/lock.html">Lock Screen Page</a></li>
-							</ul>
-						</div></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -190,40 +128,7 @@
 						</button>
 						<a class="navbar-brand" href="#datatable">사용자 목록</a>
 					</div>
-					<div class="collapse navbar-collapse">
-						<form class="navbar-form navbar-left navbar-search-form"
-							role="search">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-search"></i></span>
-								<input type="text" value="" class="form-control"
-									placeholder="Search...">
-							</div>
-						</form>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#stats" class="dropdown-toggle btn-magnify"
-								data-toggle="dropdown"> <i class="ti-panel"></i>
-									<p>Stats</p>
-							</a></li>
-							<li class="dropdown"><a href="#notigfications"
-								class="dropdown-toggle" data-toggle="dropdown"> <i
-									class="ti-bell"></i> <span class="notification">5</span>
-									<p class="hidden-md hidden-lg">
-										Notifications <b class="caret"></b>
-									</p>
-							</a>
-								<ul class="dropdown-menu">
-									<li><a href="#not1">Notification 1</a></li>
-									<li><a href="#not2">Notification 2</a></li>
-									<li><a href="#not3">Notification 3</a></li>
-									<li><a href="#not4">Notification 4</a></li>
-									<li><a href="#another">Another notification</a></li>
-								</ul></li>
-							<li><a href="#settings" class="btn-rotate"> <i
-									class="ti-settings"></i>
-									<p class="hidden-md hidden-lg">Settings</p>
-							</a></li>
-						</ul>
-					</div>
+					
 				</div>
 			</nav>
 
@@ -286,18 +191,18 @@
 				<div class="container-fluid">
 					<nav class="pull-left">
 						<ul>
-							<li><a href="http://www.creative-tim.com"> Creative Tim
+							<ul>
+							<li><a href="https://www.facebook.com/groups/1599411230361237/?ref=bookmarks"> 1% FaceBook
 							</a></li>
-							<li><a href="http://blog.creative-tim.com"> Blog </a></li>
-							<li><a href="http://www.creative-tim.com/license">
-									Licenses </a></li>
+							<li><a href="https://github.com/OnePercentDevelop"> github </a></li>
+						</ul>
 						</ul>
 					</nav>
 					<div class="copyright pull-right">
 						&copy;
 						<script>document.write(new Date().getFullYear())</script>
 						, made with <i class="fa fa-heart heart"></i> by <a
-							href="http://www.creative-tim.com">1percent</a>
+							href="<%=server %>/home.do">1percent</a>
 					</div>
 				</div>
 			</footer>

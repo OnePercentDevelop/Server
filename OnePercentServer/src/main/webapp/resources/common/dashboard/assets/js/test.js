@@ -10,6 +10,7 @@ $(document).ready(function() {
 			type : "GET",
 			url : "voteNumber.do",
 			data : query,
+			dataType : json,
 			contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
 			success : function(json) {
 				var list = $.parseJSON(json);
@@ -23,6 +24,7 @@ $(document).ready(function() {
 //                $("#before").append(json);
 //                $("#after").append(contentStr);
 			}
+		
 		});
 
 		//window.location.reload();

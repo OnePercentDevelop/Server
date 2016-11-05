@@ -22,7 +22,7 @@ public class VoteController {
 	// vote list display
 	@RequestMapping(value = "/voteList.do")
 	public ModelAndView voteList(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("voteList");
+		ModelAndView mv = new ModelAndView("voteTable");
 		List<Map<String, Object>> list = voteService.selectVoteList(commandMap);
 		mv.addObject("vote_list", list);
 		return mv;
@@ -86,17 +86,16 @@ public class VoteController {
 
 	// delete vote
 	@RequestMapping("/voteDelete.do")
-	public ModelAndView voteDelete(HttpServletRequest request, Map<String, Object> commandMap) throws Exception {
+	public void voteDelete(HttpServletRequest request, Map<String, Object> commandMap) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		request.setCharacterEncoding("utf-8");
-		String user_id = request.getParameter("user_id");
-		String vote_date = request.getParameter("vote_date");
-		map.put("user_id", user_id);
-		map.put("vote_date", vote_date);
+		int vote_id = Integer.parseInt(request.getParameter("vote_id"));
+		System.out.println("vote_id: " + vote_id);
+		map.put("vote_id", vote_id);
 		voteService.deleteVote(map);
-		ModelAndView mv = new ModelAndView("voteList");
-		List<Map<String, Object>> list = voteService.selectVoteList(commandMap);
-		mv.addObject("vote_list", list);
-		return mv;
+//		ModelAndView mv = new ModelAndView("voteList");
+//		List<Map<String, Object>> list = voteService.selectVoteList(commandMap);
+//		mv.addObject("vote_list", list);
+//		return mv;
 	}
 }

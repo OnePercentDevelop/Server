@@ -36,9 +36,6 @@ demo = {
 	                for(var i=0; i<listLen; i++){
 	                	contentStr += list[i].number;
 	                }
-	                alert(contentStr);
-//	                $("#before").append(json);
-//	                $("#after").append(contentStr);
 				}
 			});
 	},
