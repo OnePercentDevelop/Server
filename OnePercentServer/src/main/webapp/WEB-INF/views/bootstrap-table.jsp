@@ -10,7 +10,7 @@
 	href="resources/common/dashboard/assets/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<title>Paper Dashboard PRO by Creative Tim</title>
+<title>1% 사용자 목록</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <meta
@@ -53,7 +53,7 @@
 		-->
 			<div class="logo">
 				<a href="http://www.creative-tim.com" class="simple-text">
-					Creative Tim </a>
+					1% </a>
 			</div>
 			<div class="logo logo-mini">
 				<a href="http://www.creative-tim.com" class="simple-text"> Ct </a>
@@ -61,11 +61,11 @@
 			<div class="sidebar-wrapper">
 				<div class="user">
 					<div class="photo">
-						<img src="resources/common/dashboard/assets/img/faces/face-2.jpg" />
+						<img src="resources/common/dashboard/assets/img/faces/moonsu.png" />
 					</div>
 					<div class="info">
 						<a data-toggle="collapse" href="#collapseExample"
-							class="collapsed"> Chet Faker <b class="caret"></b>
+							class="collapsed"> 김 문 수 <b class="caret"></b>
 						</a>
 						<div class="collapse" id="collapseExample">
 							<ul class="nav">
@@ -297,7 +297,7 @@
 						&copy;
 						<script>document.write(new Date().getFullYear())</script>
 						, made with <i class="fa fa-heart heart"></i> by <a
-							href="http://www.creative-tim.com">Creative Tim</a>
+							href="http://www.creative-tim.com">1percent</a>
 					</div>
 				</div>
 			</footer>
