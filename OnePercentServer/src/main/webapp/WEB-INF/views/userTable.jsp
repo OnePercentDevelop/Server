@@ -70,7 +70,7 @@
 						</a>
 						<div class="collapse" id="collapseExample">
 							<ul class="nav">
-								<li><a href="#profile">My Profile</a></li>
+								<li><a href="#profile">나의 프로필</a></li>
 								<li><a href="#edit">Edit Profile</a></li>
 								<li><a href="#settings">Settings</a></li>
 							</ul>
