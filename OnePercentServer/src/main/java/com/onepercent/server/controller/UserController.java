@@ -9,7 +9,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.onepercent.server.service.UserService;
@@ -20,7 +22,7 @@ public class UserController {
 	private UserService service;
 
 	// user list display
-	@RequestMapping(value = "/userList.do")
+	@RequestMapping(value = "/userList.do", method= RequestMethod.GET)
 	public ModelAndView userList(Map<String, Object> commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("userTable");
 		List<Map<String, Object>> list = service.selectUserList(commandMap);
@@ -29,10 +31,11 @@ public class UserController {
 	}
 
 	// login check
-	@RequestMapping("/login.do")
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public ModelAndView loginCheck(HttpServletRequest request) throws Exception {
 		String user_id = request.getParameter("user_id");
 		String user_password = request.getParameter("user_password");
+		System.out.println("user_id : " + user_id + " pwd : " + user_password);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user_id", user_id);
 		String check_password = service.selectUserPassword(map);
@@ -49,18 +52,18 @@ public class UserController {
 		mv.addObject("login_result", list);
 		return mv;
 	}
-
+	
 	// user insert
-	@RequestMapping("/insertUser.do")
-	public ModelAndView userInsert(HttpServletRequest request) throws Exception {
-		request.setCharacterEncoding("EUC-KR");
+	@RequestMapping(value = "/insertUser.do", method = RequestMethod.POST)
+	public ModelAndView userInsert(@RequestBody Map<String,String> request) throws Exception {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		String user_id = request.getParameter("user_id");
-		String user_password = request.getParameter("user_password");
-		String sign_date = request.getParameter("sign_date");
-		String user_token = request.getParameter("user_token");
-
-		System.out.println("id : " + user_id + " date : " + sign_date);
+		String user_id = request.get("user_id");
+		String user_password = request.get("user_password");
+		String sign_date = request.get("sign_date");
+		String user_token = request.get("user_token");
+		
+		System.out.println("id : " + user_id + " date : " + sign_date + " password : " + user_password + " user_token : " + user_token);
 		map.put("user_id", user_id);
 		map.put("user_password", user_password);
 		map.put("user_token", user_token);
@@ -83,7 +86,7 @@ public class UserController {
 	}
 
 	// delete user
-	@RequestMapping("/userDelete.do")
+	@RequestMapping(value ="/userDelete.do", method = RequestMethod.POST)
 	public void userDelete(HttpServletRequest request, Map<String, Object> commandMap) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String user_id = request.getParameter("user_id");
