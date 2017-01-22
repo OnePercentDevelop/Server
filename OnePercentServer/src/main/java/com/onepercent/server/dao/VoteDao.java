@@ -20,6 +20,12 @@ public class VoteDao extends abDAO{
 	public List<Map<String, Object>> selectVoteNumber(Map<String, Object> commandMap) {
 		return (List<Map<String,Object>>)selectList("voteSQL.selectVoteNumber", commandMap);
 	}
+	public List<Map<String, Object>> selectVoteResult() {
+		return (List<Map<String,Object>>)selectList("voteSQL.selectVoteResult");
+	}
+	public List<Map<String, Object>> selectVoteResultSince(Map<String, Object> commandMap) {
+		return (List<Map<String,Object>>)selectList("voteSQL.selectVoteResultSince", commandMap);
+	}
 	public void deleteVote(Map<String, Object> map) {
 		delete("voteSQL.deleteVote",map);
 	}

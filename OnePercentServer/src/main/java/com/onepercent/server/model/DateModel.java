@@ -14,9 +14,9 @@ public class DateModel {
 		int year = 1900+date.getYear();
 		int month = date.getMonth()+1;
 		int day = date.getDate();
-		today_date = ""+year+"년";
-		today_date += month/10 > 0 ? ""+month+"월" : "0"+month+"월";
-		today_date += day/10 > 0 ? ""+day+"일" : "0"+day+"일";
+		today_date = ""+year+".";
+		today_date += month/10 > 0 ? ""+month+"." : "0"+month+".";
+		today_date += day/10 > 0 ? ""+day+"" : "0"+day+"";
 		return today_date ;
 	}
 }

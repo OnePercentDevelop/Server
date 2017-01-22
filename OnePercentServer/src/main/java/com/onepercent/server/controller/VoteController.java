@@ -41,20 +41,22 @@ public class VoteController {
 		mv.addObject("uservote_list", list);
 		return mv;
 	}
+
 	// 현재 투표자 수 가져오기
-		@RequestMapping(value = "/voteNumber.do", method = RequestMethod.GET)
-		public ModelAndView getVoteNumber(HttpServletRequest request) throws Exception {
-			String vote_date = request.getParameter("vote_date");
-			request.setCharacterEncoding("EUC-KR");
-			System.out.println("vote_date : " + vote_date);
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("vote_date", vote_date);
-			ModelAndView mv = new ModelAndView("jsonView");
-			List<Map<String, Object>> list = voteService.selectVoteNumber(map);
-			list.get(0).put("test", "hello");
-			mv.addObject("vote_result", list);
-			return mv;
-		}
+	@RequestMapping(value = "/voteNumber.do", method = RequestMethod.GET)
+	public ModelAndView getVoteNumber(HttpServletRequest request) throws Exception {
+		String vote_date = request.getParameter("vote_date");
+		request.setCharacterEncoding("EUC-KR");
+		System.out.println("vote_date : " + vote_date);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vote_date", vote_date);
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<Map<String, Object>> list = voteService.selectVoteNumber(map);
+		list.get(0).put("test", "hello");
+		mv.addObject("vote_result", list);
+		return mv;
+	}
+
 	// vote insert
 	@RequestMapping(value = "/insertVote.do", method = RequestMethod.POST)
 	public ModelAndView voteInser(@RequestBody Map<String, String> request) throws Exception {
@@ -93,9 +95,31 @@ public class VoteController {
 		System.out.println("vote_id: " + vote_id);
 		map.put("vote_id", vote_id);
 		voteService.deleteVote(map);
-//		ModelAndView mv = new ModelAndView("voteList");
-//		List<Map<String, Object>> list = voteService.selectVoteList(commandMap);
-//		mv.addObject("vote_list", list);
-//		return mv;
+		// ModelAndView mv = new ModelAndView("voteList");
+		// List<Map<String, Object>> list =
+		// voteService.selectVoteList(commandMap);
+		// mv.addObject("vote_list", list);
+		// return mv;
+	}
+
+	// 투표 결과 모두 가져오기
+	@RequestMapping(value = "/voteResult.do", method = RequestMethod.GET)
+	public ModelAndView getVoteResult(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<Map<String, Object>> list = voteService.selectVoteResult();
+		mv.addObject("voteTotalResult", list);
+		return mv;
+	}
+
+	// 해당 날짜 이후의 투표 결과 가져오기
+	@RequestMapping(value = "/voteResultSince.do", method = RequestMethod.GET)
+	public ModelAndView getVoteResultSince(HttpServletRequest request) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String vote_date = request.getParameter("vote_date");
+		map.put("vote_date", vote_date);
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<Map<String, Object>> list = voteService.selectVoteResultSince(map);
+		mv.addObject("voteResultSince", list);
+		return mv;
 	}
 }

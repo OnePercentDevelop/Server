@@ -17,4 +17,8 @@ public class CalendarController {
 	public String calendarView(Locale locale, Model model) throws Exception {
 		return "calendar";
 	}
+	@RequestMapping(value = "test.do", method = RequestMethod.GET)
+	public String testtes(Locale locale, Model model) throws Exception {
+		return "test";
+	}
 }

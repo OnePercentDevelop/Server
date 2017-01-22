@@ -20,24 +20,27 @@ demo = {
 				});
 
 	},
-	initTest : function() {
-		var query = {
-				vote_date : $("#vote_date").val()
-			};
-			$.ajax({
-				type : "GET",
-				url : "voteNumber.do",
-				data : query,
-				dataType: "json",
-				success : function(json) {
-					var list = json.vote_result;
-	                var listLen = list.length;
-	                var contentStr = "";
-	                for(var i=0; i<listLen; i++){
-	                	contentStr += list[i].number;
-	                }
-				}
-			});
+	polling : function() {
+		alert("in");
+//		var query = {
+//				vote_date : $("#vote_date").val()
+//			};
+//			$.ajax({
+//				type : "GET",
+//				url : "voteNumber.do",
+//				data : query,
+//				dataType: "json",
+//				success : function(json) {
+//					var list = json.vote_result;
+//	                var listLen = list.length;
+//	                var contentStr = "";
+//	                for(var i=0; i<listLen; i++){
+//	                	contentStr += list[i].number;
+//	                }
+//	                alert("hello");
+//	                $('#vote_number').html("<div id='vote_number'>1</div>");
+//				}
+//			});
 	},
 	initGoogleMaps : function() {
 

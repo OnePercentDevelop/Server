@@ -1,6 +1,5 @@
 package com.onepercent.server.controller;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,7 +31,6 @@ public class UserController {
 		mv.addObject("user_list", list);
 		return mv;
 	}
-
 	// login check
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
 	public ModelAndView loginCheck(HttpServletRequest request) throws Exception {
@@ -61,10 +59,10 @@ public class UserController {
 	public ModelAndView userInsert(@RequestBody Map<String,String> request) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		String user_id = URLEncoder.encode(request.get("user_id"), "utf-8");
-		String user_password = URLEncoder.encode(request.get("user_password"), "utf-8");
-		String sign_date = URLEncoder.encode(request.get("sign_date"), "utf-8");
-		String user_token = URLEncoder.encode(request.get("user_token"), "utf-8");
+		String user_id = request.get("user_id");
+		String user_password = request.get("user_password");
+		String sign_date = request.get("sign_date");
+		String user_token = request.get("user_token");
 		logger.info("id : " + user_id + " date : " + sign_date + " password : " + user_password + " user_token : " + user_token);
 		System.out.println("id : " + user_id + " date : " + sign_date + " password : " + user_password + " user_token : " + user_token);
 		map.put("user_id", user_id);

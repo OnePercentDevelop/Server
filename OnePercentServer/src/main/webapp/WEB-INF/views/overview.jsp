@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-	<%@ page import="com.onepercent.server.model.DateModel"%>
+<%@ page import="com.onepercent.server.model.DateModel"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -59,10 +59,10 @@
 			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 		-->
 			<div class="logo">
-				<a href="<%=server %>/home.do" class="simple-text"> 1Percent </a>
+				<a href="<%=server%>/home.do" class="simple-text"> 1Percent </a>
 			</div>
 			<div class="logo logo-mini">
-				<a href="<%=server %>/home.do" class="simple-text"> 1% </a>
+				<a href="<%=server%>/home.do" class="simple-text"> 1% </a>
 			</div>
 			<div class="sidebar-wrapper">
 				<div class="user">
@@ -92,7 +92,7 @@
 					</a>
 						<div class="collapse in" id="dashboardOverview">
 							<ul class="nav">
-								<li class="active"><a href="<%=server %>/home.do">현황판</a></li>
+								<li class="active"><a href="<%=server%>/home.do">현황판</a></li>
 								<li><a href="#">Stats</a></li>
 							</ul>
 						</div></li>
@@ -105,13 +105,12 @@
 					</a>
 						<div class="collapse" id="tablesExamples">
 							<ul class="nav">
-								<li><a href="<%=server %>/userList.do">사용자 목록</a></li>
-								<li><a href="<%=server %>/voteList.do">투표 목록</a></li>
+								<li><a href="<%=server%>/userList.do">사용자 목록</a></li>
+								<li><a href="<%=server%>/voteList.do">투표 목록</a></li>
 							</ul>
 						</div></li>
 
-					<li><a
-						href="<%=server %>/calendar.do"> <i
+					<li><a href="<%=server%>/calendar.do"> <i
 							class="ti-calendar"></i>
 							<p>Calendar</p>
 					</a></li>
@@ -134,7 +133,7 @@
 								class="icon-bar bar1"></span> <span class="icon-bar bar2"></span>
 							<span class="icon-bar bar3"></span>
 						</button>
-						<a class="navbar-brand" href="<%=server %>/home.do"> 현황판 보기 </a>
+						<a class="navbar-brand" href="<%=server%>/home.do"> 현황판 보기 </a>
 					</div>
 				</div>
 			</nav>
@@ -179,7 +178,7 @@
 										<div class="col-xs-7">
 											<div class="numbers">
 												<p>투표자 수</p>
-												${result[0].number}
+												<div id='vote_number'>0</div>
 											</div>
 										</div>
 									</div>
@@ -393,16 +392,20 @@
 				<div class="container-fluid">
 					<nav class="pull-left">
 						<ul>
-							<li><a href="https://www.facebook.com/groups/1599411230361237/?ref=bookmarks"> 1% FaceBook
-							</a></li>
-							<li><a href="https://github.com/OnePercentDevelop"> github </a></li>
+							<li><a
+								href="https://www.facebook.com/groups/1599411230361237/?ref=bookmarks">
+									1% FaceBook </a></li>
+							<li><a href="https://github.com/OnePercentDevelop">
+									github </a></li>
 						</ul>
 					</nav>
 					<div class="copyright pull-right">
 						&copy;
-						<script>document.write(new Date().getFullYear())</script>
+						<script>
+							document.write(new Date().getFullYear())
+						</script>
 						, made with <i class="fa fa-heart heart"></i> by <a
-							href="<%=server %>/home.do">1Percent</a>
+							href="<%=server%>/home.do">1Percent</a>
 					</div>
 				</div>
 			</footer>
@@ -473,11 +476,29 @@
 <script src="resources/common/dashboard/assets/js/demo.js"></script>
 
 <script type="text/javascript">
-    	$(document).ready(function(){
-			demo.initOverviewDashboard();
-			demo.initCirclePercentage();
-			demo.initTest();
-    	});
-	</script>
+	$(document).ready(function() {
+		demo.initOverviewDashboard();
+		demo.initCirclePercentage();
+		poll();
+		demo.polling();
+	});
+	var poll = function (){
+		var query = {
+				vote_date : $("#vote_date").val()
+			};
+		
+	    $.ajax({ type : "GET", url: "voteNumber.do", data : query, success: function(json){
+	    	var list = json.vote_result;
+			var listLen = list.length;
+			var contentStr = "";
+			for (var i = 0; i < listLen; i++) {
+				contentStr += list[i].number;
+			}
+			$('#vote_number').html(
+					"<div id='vote_number'>" + contentStr + "</div>");
+	    }, dataType: "json", complete: poll, timeout: 30000 });
+	};
+	
+</script>
 
 </html>

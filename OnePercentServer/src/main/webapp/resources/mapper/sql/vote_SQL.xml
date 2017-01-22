@@ -32,6 +32,24 @@
 			   OnePercentVote
 		]]>
 	</select>
+	<select id="selectVoteResult" resultType="hashmap">
+		<![CDATA[
+			SELECT
+			    *
+			FROM
+				VoteResult
+		]]>
+	</select>
+	<select id="selectVoteResultSince" resultType="hashmap">
+		<![CDATA[
+			SELECT
+			    *
+			FROM
+				VoteResult
+			WHERE
+				vote_date >= #{vote_date}
+		]]>
+	</select>
 	<insert id="insertVote" parameterType="hashmap">
 	<![CDATA[
 	    	IF EXISTS(

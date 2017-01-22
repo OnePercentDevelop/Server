@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <input type="text" name="id" id="id">
+  <div id = 'test'>0</div>
   <input type='button' id="login_btn" value='·Î±×ÀÎ'>
 </body>
 </html>
