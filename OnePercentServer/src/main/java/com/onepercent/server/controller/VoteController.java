@@ -150,6 +150,31 @@ public class VoteController {
 		mv.addObject("question_result", return_list);
 		return mv;
 	}
-	// 질문지 update
+	
+	// 해당 질문에 결과 update
+	@RequestMapping(value = "/updateQuestionResult.do")
+	public ModelAndView updateQuestionResult(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		String vote_date = request.getParameter("vote_date");
+		// vote_date형식이 제대로 왔는지 검사 필요.
+		
+		int ex1_count = Integer.parseInt(request.getParameter("ex1_count"));
+		int ex2_count = Integer.parseInt(request.getParameter("ex2_count"));
+		int ex3_count = Integer.parseInt(request.getParameter("ex3_count"));
+		int ex4_count = Integer.parseInt(request.getParameter("ex4_count"));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vote_date", vote_date);
+		map.put("ex1_count", ex1_count);
+		map.put("ex2_count", ex2_count);
+		map.put("ex3_count", ex3_count);
+		map.put("ex4_count", ex4_count);
+		voteService.updateQuestionResult(map);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> return_map = new HashMap<String, Object>();
+		return_map.put("state", "success");
+		list.add(return_map);
+		mv.addObject("update_state", list);
+		return mv;
+	}
 	
 }

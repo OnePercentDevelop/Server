@@ -114,14 +114,19 @@
 		
 	</insert>
 
-	<update id="updateLetterState" parameterType="hashmap">
+	<update id="updateQuestionResult" parameterType="hashmap">
 		<![CDATA[
 			UPDATE
-				letter_tb
+				VoteResult
 			SET
-				read_state=1
+				ex1_count = #{ex1_count},
+				ex2_count = #{ex2_count},
+				ex3_count = #{ex3_count},
+				ex4_count = #{ex4_count},
+				total_count = #{total_count},
+				prize_count = #{prize_count}
 			WHERE
-				letter_id=#{letter_id}
+				vote_date = #{vote_date}
 		]]>
 	</update>
 	<delete id="deleteVote" parameterType="hashmap">

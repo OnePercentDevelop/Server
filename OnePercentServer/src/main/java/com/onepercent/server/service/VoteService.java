@@ -31,14 +31,17 @@ public class VoteService {
 	public List<Map<String, Object>> selectVoteList(Map<String, Object> Map) throws Exception {
 		return voteDao.selectVoteList(Map);
 	}
+
 	// 투표 결과 모두 가져오기
 	public List<Map<String, Object>> selectVoteResult() throws Exception {
 		return voteDao.selectVoteResult();
 	}
+
 	// 해당 날짜 이후로 투표 결과 가져오기
 	public List<Map<String, Object>> selectVoteResultSince(Map<String, Object> Map) throws Exception {
 		return voteDao.selectVoteResultSince(Map);
 	}
+
 	// user 투표 내역 가져오기
 	public List<Map<String, Object>> selectUserVoteList(Map<String, Object> Map) throws Exception {
 		return voteDao.selectUserVoteList(Map);
@@ -58,23 +61,35 @@ public class VoteService {
 	public int insertVote(Map<String, Object> map) {
 		return voteDao.insertVote(map);
 	}
+
 	// 질문지 insert
-		public int insertQuestion(Map<String, Object> map) {
-			return voteDao.insertQuestion(map);
-		}
+	public int insertQuestion(Map<String, Object> map) {
+		return voteDao.insertQuestion(map);
+	}
 	
+	public void updateQuestionResult(Map<String, Object> map) {
+		int total_count = (Integer) map.get("ex1_count") + (Integer) map.get("ex2_count") + (Integer) map.get("ex3_count") + (Integer) map.get("ex4_count");
+		int prize_count = total_count < 100 ? 1 : Math.round(total_count/100);
+		map.put("total_count", total_count);
+		map.put("prize_count", prize_count);
+		voteDao.updateQuestionResult(map);
+	}
+
 	public Map<String, Object> todayQuestion() throws IOException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Date date = new Date();
-		/************************ 실제로 배포할 때 이부분 사용 ******************************/
-//		String today = 1900+date.getYear()+"" + (date.getMonth()+1)+""+date.getDate();
+		/************************
+		 * 실제로 배포할 때 이부분 사용
+		 ******************************/
+		// String today = 1900+date.getYear()+"" +
+		// (date.getMonth()+1)+""+date.getDate();
 		/***************************************************************************/
 		String today = "20161102";
 		String question_str[] = questionRead(today);
 		List<Map<String, String>> example_list = new ArrayList<Map<String, String>>();
 		Map<String, String> example_map = new HashMap<String, String>();
-		for (int i = 1 ; i < question_str.length-1; i++) {
-			example_map.put(""+i,question_str[i]);
+		for (int i = 1; i < question_str.length - 1; i++) {
+			example_map.put("" + i, question_str[i]);
 			System.out.println(question_str[i]);
 		}
 		example_list.add(example_map);
@@ -88,38 +103,38 @@ public class VoteService {
 		map.put("gift_png", "banana.png");
 		return map;
 	}
+
 	public String giftRead(String today) throws IOException {
 		String result = "";
 		String test = "";
-		File file = new File("D://home/temp/onepercent/main/gift/"+today+"gift.txt");
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file), "utf-8"));
-		while ((test = br.readLine()) != null){
+		File file = new File("D://home/temp/onepercent/main/gift/" + today + "gift.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"));
+		while ((test = br.readLine()) != null) {
 			result += test;
 		}
 		br.close();
 		return result;
 	}
-	public String[] questionRead(String today) throws IOException {
-		File file = new File("D://home/temp/onepercent/main/question/"+today+"question.txt");
 
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file), "utf-8"));
-        String data[] = new String[6];
-        int cnt = 0;
-        while ((data[cnt] = br.readLine()) != null){
-        	cnt++;
-        }
+	public String[] questionRead(String today) throws IOException {
+		File file = new File("D://home/temp/onepercent/main/question/" + today + "question.txt");
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"));
+		String data[] = new String[6];
+		int cnt = 0;
+		while ((data[cnt] = br.readLine()) != null) {
+			cnt++;
+		}
 		br.close();
 		return data;
 	}
+
 	public String winnerRead(String today) throws IOException {
 		String result = "";
 		String test = "";
-		File file = new File("D://home/temp/onepercent/main/winner/"+today+"winner.txt");
-		BufferedReader br = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file), "utf-8"));
-		while ((test = br.readLine()) != null){
+		File file = new File("D://home/temp/onepercent/main/winner/" + today + "winner.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"));
+		while ((test = br.readLine()) != null) {
 			result += test;
 		}
 		br.close();

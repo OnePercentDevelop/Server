@@ -35,4 +35,7 @@ public class VoteDao extends abDAO{
 	public int insertQuestion(Map<String, Object> map) {
 		return (Integer)insert("voteSQL.insertQuestion", map);
 	}
+	public void updateQuestionResult(Map<String, Object> map) {
+		update("voteSQL.updateQuestionResult", map);
+	}
 }
