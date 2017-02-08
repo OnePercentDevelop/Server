@@ -38,6 +38,7 @@
 			    *
 			FROM
 				VoteResult
+			ORDER BY vote_date ASC
 		]]>
 	</select>
 	<select id="selectVoteResultSince" resultType="hashmap">
@@ -48,6 +49,7 @@
 				VoteResult
 			WHERE
 				vote_date >= #{vote_date}
+			ORDER BY vote_date ASC
 		]]>
 	</select>
 	<insert id="insertVote" parameterType="hashmap">
@@ -78,7 +80,39 @@
 		
 	</insert>
 	
-
+<insert id="insertQuestion" parameterType="hashmap">
+	<![CDATA[
+	    	IF EXISTS(
+                SELECT voteresult_id FROM VoteResult
+                WHERE vote_date=#{vote_date}
+         	)
+    	BEGIN
+        	SELECT 99 cnt
+    	END
+    
+    	ELSE
+        	BEGIN
+        	INSERT
+				INTO VoteResult(
+			    	vote_date,
+			    	vote_question,
+			    	ex1_value,
+			    	ex2_value,
+			    	ex3_value,
+			    	ex4_value
+			    	)
+				VALUES(
+			    	#{vote_date},
+			    	#{vote_question},
+			    	#{ex1_value},
+			    	#{ex2_value},
+			    	#{ex3_value},
+			    	#{ex4_value}
+			    )
+       	END
+		]]>
+		
+	</insert>
 
 	<update id="updateLetterState" parameterType="hashmap">
 		<![CDATA[

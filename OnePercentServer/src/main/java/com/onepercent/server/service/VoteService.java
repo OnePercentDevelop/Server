@@ -58,6 +58,10 @@ public class VoteService {
 	public int insertVote(Map<String, Object> map) {
 		return voteDao.insertVote(map);
 	}
+	// Áú¹®Áö insert
+		public int insertQuestion(Map<String, Object> map) {
+			return voteDao.insertQuestion(map);
+		}
 	
 	public Map<String, Object> todayQuestion() throws IOException {
 		Map<String, Object> map = new HashMap<String, Object>();

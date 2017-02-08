@@ -122,4 +122,34 @@ public class VoteController {
 		mv.addObject("voteResultSince", list);
 		return mv;
 	}
+
+	// 질문지 insert
+	@RequestMapping(value = "/insertQuestion.do")
+	public ModelAndView insertQuestion(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		String vote_date = request.getParameter("vote_date");
+		String vote_question = request.getParameter("vote_question");
+		String ex1_value = request.getParameter("ex1_value");
+		String ex2_value = request.getParameter("ex2_value");
+		String ex3_value = request.getParameter("ex3_value");
+		String ex4_value = request.getParameter("ex4_value");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vote_date", vote_date);
+		map.put("vote_question", vote_question);
+		map.put("ex1_value", ex1_value);
+		map.put("ex2_value", ex2_value);
+		map.put("ex3_value", ex3_value);
+		map.put("ex4_value", ex4_value);
+		int question_state = voteService.insertQuestion(map);
+		List<Map<String, Object>> return_list = new ArrayList<Map<String,Object>>();
+		Map<String,Object> return_map = new HashMap<String, Object>();
+		if (question_state == 1) {
+			return_map.put("state", "success");
+		} else return_map.put("state", "fail");
+		return_list.add(return_map);
+		mv.addObject("question_result", return_list);
+		return mv;
+	}
+	// 질문지 update
+	
 }
