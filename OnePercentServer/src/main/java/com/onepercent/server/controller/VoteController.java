@@ -2,6 +2,7 @@ package com.onepercent.server.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,7 +114,7 @@ public class VoteController {
 	@RequestMapping(value = "/voteResult.do", method = RequestMethod.GET)
 	public ModelAndView getVoteResult(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
-		List<Map<String, Object>> list = voteService.selectVoteResult();
+		List<LinkedHashMap<String, Object>> list = voteService.selectVoteResult();
 		mv.addObject("voteTotalResult", list);
 		return mv;
 	}
@@ -125,8 +126,17 @@ public class VoteController {
 		String vote_date = request.getParameter("vote_date");
 		map.put("vote_date", vote_date);
 		ModelAndView mv = new ModelAndView("jsonView");
-		List<Map<String, Object>> list = voteService.selectVoteResultSince(map);
+		List<LinkedHashMap<String, Object>> list = voteService.selectVoteResultSince(map);
 		mv.addObject("voteResultSince", list);
+		return mv;
+	}
+
+	// 오늘 날짜에 맞는 투표 가져오기
+	@RequestMapping(value = "/todayQuestion.do", method = RequestMethod.GET)
+	public ModelAndView getTodayQuestion() throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<LinkedHashMap<String, Object>> list = voteService.selectTodayQuestion();
+		mv.addObject("todayQuestion", list);
 		return mv;
 	}
 

@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,13 +34,20 @@ public class VoteService {
 	}
 
 	// 투표 결과 모두 가져오기
-	public List<Map<String, Object>> selectVoteResult() throws Exception {
+	public List<LinkedHashMap<String, Object>> selectVoteResult() throws Exception {
 		return voteDao.selectVoteResult();
 	}
 
 	// 해당 날짜 이후로 투표 결과 가져오기
-	public List<Map<String, Object>> selectVoteResultSince(Map<String, Object> Map) throws Exception {
+	public List<LinkedHashMap<String, Object>> selectVoteResultSince(Map<String, Object> Map) throws Exception {
 		return voteDao.selectVoteResultSince(Map);
+	}
+
+	// 오늘 투표 가져오기
+	public List<LinkedHashMap<String, Object>> selectTodayQuestion() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vote_date", getToday());
+		return voteDao.selectTodayQuestion(map);
 	}
 
 	// user 투표 내역 가져오기
@@ -66,13 +74,26 @@ public class VoteService {
 	public int insertQuestion(Map<String, Object> map) {
 		return voteDao.insertQuestion(map);
 	}
-	
+
 	public void updateQuestionResult(Map<String, Object> map) {
-		int total_count = (Integer) map.get("ex1_count") + (Integer) map.get("ex2_count") + (Integer) map.get("ex3_count") + (Integer) map.get("ex4_count");
-		int prize_count = total_count < 100 ? 1 : Math.round(total_count/100);
+		int total_count = (Integer) map.get("ex1_count") + (Integer) map.get("ex2_count")
+				+ (Integer) map.get("ex3_count") + (Integer) map.get("ex4_count");
+		int prize_count = total_count < 100 ? 1 : Math.round(total_count / 100);
 		map.put("total_count", total_count);
 		map.put("prize_count", prize_count);
 		voteDao.updateQuestionResult(map);
+	}
+
+	public String getToday() {
+		Date date = new Date();
+		int month = date.getMonth() + 1;
+		int day = date.getDate();
+		String today = 1900 + date.getYear() + ".";
+		today += month < 10 ? "0" + month : "" + month;
+		today += ".";
+		today += day < 10 ? "0" + day : "" + day;
+		System.out.println("today : " + today);
+		return today;
 	}
 
 	public Map<String, Object> todayQuestion() throws IOException {

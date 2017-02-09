@@ -32,7 +32,7 @@
 			   OnePercentVote
 		]]>
 	</select>
-	<select id="selectVoteResult" resultType="hashmap">
+	<select id="selectVoteResult" resultType="java.util.LinkedHashMap">
 		<![CDATA[
 			SELECT
 			    *
@@ -41,7 +41,7 @@
 			ORDER BY vote_date ASC
 		]]>
 	</select>
-	<select id="selectVoteResultSince" resultType="hashmap">
+	<select id="selectVoteResultSince" parameterType="hashmap" resultType="java.util.LinkedHashMap" >
 		<![CDATA[
 			SELECT
 			    *
@@ -50,6 +50,16 @@
 			WHERE
 				vote_date >= #{vote_date}
 			ORDER BY vote_date ASC
+		]]>
+	</select>
+	<select id="selectTodayQuestion" parameterType="hashmap" resultType="java.util.LinkedHashMap" >
+		<![CDATA[
+			SELECT
+			   vote_question, ex1_value, ex2_value, ex3_value, ex4_value
+			FROM
+				VoteResult
+			WHERE
+				vote_date = #{vote_date}
 		]]>
 	</select>
 	<insert id="insertVote" parameterType="hashmap">

@@ -1,5 +1,6 @@
 package com.onepercent.server.dao;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +21,16 @@ public class VoteDao extends abDAO{
 	public List<Map<String, Object>> selectVoteNumber(Map<String, Object> commandMap) {
 		return (List<Map<String,Object>>)selectList("voteSQL.selectVoteNumber", commandMap);
 	}
-	public List<Map<String, Object>> selectVoteResult() {
-		return (List<Map<String,Object>>)selectList("voteSQL.selectVoteResult");
+	public List<LinkedHashMap<String, Object>> selectVoteResult() {
+		return (List<LinkedHashMap<String,Object>>)selectList("voteSQL.selectVoteResult");
 	}
-	public List<Map<String, Object>> selectVoteResultSince(Map<String, Object> commandMap) {
-		return (List<Map<String,Object>>)selectList("voteSQL.selectVoteResultSince", commandMap);
+	public List<LinkedHashMap<String, Object>> selectVoteResultSince(Map<String, Object> commandMap) {
+		return (List<LinkedHashMap<String,Object>>)selectList("voteSQL.selectVoteResultSince", commandMap);
 	}
+	public List<LinkedHashMap<String, Object>> selectTodayQuestion(Map<String, Object> commandMap) {
+		System.out.println("view : " + commandMap.get("vote_date"));
+		return (List<LinkedHashMap<String,Object>>)selectList("voteSQL.selectTodayQuestion", commandMap);
+	}	
 	public void deleteVote(Map<String, Object> map) {
 		delete("voteSQL.deleteVote",map);
 	}
