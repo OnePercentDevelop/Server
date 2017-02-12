@@ -44,10 +44,8 @@ public class VoteService {
 	}
 
 	// 오늘 투표 가져오기
-	public List<LinkedHashMap<String, Object>> selectTodayQuestion() throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("vote_date", getToday());
-		return voteDao.selectTodayQuestion(map);
+	public List<LinkedHashMap<String, Object>> selectTodayQuestion(Map<String, Object> Map) throws Exception {
+		return voteDao.selectTodayQuestion(Map);
 	}
 
 	// user 투표 내역 가져오기

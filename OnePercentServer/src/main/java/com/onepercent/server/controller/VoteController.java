@@ -133,9 +133,12 @@ public class VoteController {
 
 	// 오늘 날짜에 맞는 투표 가져오기
 	@RequestMapping(value = "/todayQuestion.do", method = RequestMethod.GET)
-	public ModelAndView getTodayQuestion() throws Exception {
+	public ModelAndView getTodayQuestion(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
-		List<LinkedHashMap<String, Object>> list = voteService.selectTodayQuestion();
+		String vote_date = request.getParameter("vote_date");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("vote_date", vote_date);
+		List<LinkedHashMap<String, Object>> list = voteService.selectTodayQuestion(map);
 		mv.addObject("todayQuestion", list);
 		return mv;
 	}
@@ -144,6 +147,7 @@ public class VoteController {
 	@RequestMapping(value = "/insertQuestion.do")
 	public ModelAndView insertQuestion(HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("jsonView");
+		request.setCharacterEncoding("utf-8");
 		String vote_date = request.getParameter("vote_date");
 		String vote_question = request.getParameter("vote_question");
 		String ex1_value = request.getParameter("ex1_value");
