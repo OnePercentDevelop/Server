@@ -110,7 +110,7 @@
 
 		                <div class="col-md-12">
 		                    <div class="card">
-		                        <form id="questionForm" action="/server/insertQuestion.do" method="POST" class="form-horizontal" novalidate="">
+		                        <form id="questionForm" action="/OnePercentServer/insertQuestion.do" method="POST" class="form-horizontal" novalidate="">
 		                            <div class="content">
 		                                <h4 class="title">질문지 생성</h4>
 		                                <fieldset>

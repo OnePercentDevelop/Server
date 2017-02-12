@@ -146,7 +146,7 @@ public class VoteController {
 	// Áú¹®Áö insert
 	@RequestMapping(value = "/insertQuestion.do")
 	public ModelAndView insertQuestion(HttpServletRequest request) throws Exception {
-		ModelAndView mv = new ModelAndView("jsonView");
+		ModelAndView mv = null;
 		request.setCharacterEncoding("utf-8");
 		String vote_date = request.getParameter("vote_date");
 		String vote_question = request.getParameter("vote_question");
@@ -162,14 +162,11 @@ public class VoteController {
 		map.put("ex3_value", ex3_value);
 		map.put("ex4_value", ex4_value);
 		int question_state = voteService.insertQuestion(map);
-		List<Map<String, Object>> return_list = new ArrayList<Map<String, Object>>();
-		Map<String, Object> return_map = new HashMap<String, Object>();
 		if (question_state == 1) {
-			return_map.put("state", "success");
-		} else
-			return_map.put("state", "fail");
-		return_list.add(return_map);
-		mv.addObject("question_result", return_list);
+			mv = new ModelAndView("questionForm");
+		} else {
+			mv = new ModelAndView("questionForm");
+		}		
 		return mv;
 	}
 
