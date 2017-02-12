@@ -38,7 +38,8 @@
 			    *
 			FROM
 				VoteResult
-			ORDER BY vote_date ASC
+			WHERE total_count is not null
+			ORDER BY vote_date ASC 
 		]]>
 	</select>
 	<select id="selectVoteResultSince" parameterType="hashmap" resultType="java.util.LinkedHashMap" >
@@ -48,7 +49,7 @@
 			FROM
 				VoteResult
 			WHERE
-				vote_date >= #{vote_date}
+				vote_date >= #{vote_date} AND total_count is not null
 			ORDER BY vote_date ASC
 		]]>
 	</select>
