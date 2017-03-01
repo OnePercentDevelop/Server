@@ -110,6 +110,24 @@ public class VoteController {
 		// return mv;
 	}
 
+	// 투표 리스트 보여주기
+	@RequestMapping(value = "/questionList.do", method = RequestMethod.GET)
+	public ModelAndView getQuestionList(HttpServletRequest request) throws Exception {
+		ModelAndView mv = new ModelAndView("questionList");
+		List<LinkedHashMap<String, Object>> list = voteService.selectQuestionList();
+		mv.addObject("question_list", list);
+		return mv;
+	}
+	
+	// 질문지 삭제하기
+	@RequestMapping(value = "/deleteQuestion.do", method = RequestMethod.POST)
+	public void deleteQuestion(HttpServletRequest request) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String vote_date= request.getParameter("vote_date");
+		map.put("vote_date", vote_date);
+		voteService.deleteQuestion(map);
+	}
+	
 	// 투표 결과 모두 가져오기
 	@RequestMapping(value = "/voteResult.do", method = RequestMethod.GET)
 	public ModelAndView getVoteResult(HttpServletRequest request) throws Exception {
@@ -146,7 +164,7 @@ public class VoteController {
 	// 질문지 insert
 	@RequestMapping(value = "/insertQuestion.do")
 	public ModelAndView insertQuestion(HttpServletRequest request) throws Exception {
-		ModelAndView mv = null;
+		ModelAndView mv = new ModelAndView("jsonView");
 		request.setCharacterEncoding("utf-8");
 		String vote_date = request.getParameter("vote_date");
 		String vote_question = request.getParameter("vote_question");
@@ -154,6 +172,8 @@ public class VoteController {
 		String ex2_value = request.getParameter("ex2_value");
 		String ex3_value = request.getParameter("ex3_value");
 		String ex4_value = request.getParameter("ex4_value");
+		System.out.println("vote_date : " + vote_date);
+		System.out.println(vote_question + " / " + ex1_value + ", " + ex2_value + ", " + ex3_value + ", " + ex4_value);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("vote_date", vote_date);
 		map.put("vote_question", vote_question);
@@ -162,11 +182,14 @@ public class VoteController {
 		map.put("ex3_value", ex3_value);
 		map.put("ex4_value", ex4_value);
 		int question_state = voteService.insertQuestion(map);
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		map.clear();
 		if (question_state == 1) {
-			mv = new ModelAndView("questionForm");
+			map.put("state", "success");
 		} else {
-			mv = new ModelAndView("questionForm");
-		}		
+			map.put("state", "fail");
+		}
+		mv.addObject("input_result", map);
 		return mv;
 	}
 

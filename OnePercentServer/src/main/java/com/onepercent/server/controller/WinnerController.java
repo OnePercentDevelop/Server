@@ -20,6 +20,18 @@ public class WinnerController {
 	@Resource(name = "WinnerService")
 	private WinnerService winnerService;
 
+	// 오늘의 상품 가져오기
+		@RequestMapping(value = "/today.do", method = RequestMethod.GET)
+		public ModelAndView getTodayQuestion(HttpServletRequest request) throws Exception {
+			ModelAndView mv = new ModelAndView("jsonView");
+			String vote_date = request.getParameter("vote_date");
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("vote_date", vote_date);
+			List<LinkedHashMap<String, Object>> list = winnerService.selectTodayGift(map);
+			mv.addObject("todayQuestion", list);
+			return mv;
+		}
+	
 	// 당첨자 모두 가져오기
 	@RequestMapping(value = "/WinnerResult.do")
 	public ModelAndView main(HttpServletRequest request) throws Exception {

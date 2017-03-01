@@ -24,6 +24,9 @@ public class VoteDao extends abDAO{
 	public List<LinkedHashMap<String, Object>> selectVoteResult() {
 		return (List<LinkedHashMap<String,Object>>)selectList("voteSQL.selectVoteResult");
 	}
+	public List<LinkedHashMap<String, Object>> selectQuestionList() {
+		return (List<LinkedHashMap<String,Object>>)selectList("voteSQL.selectQuestionList");
+	}
 	public List<LinkedHashMap<String, Object>> selectVoteResultSince(Map<String, Object> commandMap) {
 		return (List<LinkedHashMap<String,Object>>)selectList("voteSQL.selectVoteResultSince", commandMap);
 	}
@@ -33,6 +36,9 @@ public class VoteDao extends abDAO{
 	}	
 	public void deleteVote(Map<String, Object> map) {
 		delete("voteSQL.deleteVote",map);
+	}
+	public void deleteQuestion(Map<String, Object> map) {
+		delete("voteSQL.deleteQuestion",map);
 	}
 	public int insertVote(Map<String, Object> map) {
 		return (Integer)insert("voteSQL.insertVote", map);

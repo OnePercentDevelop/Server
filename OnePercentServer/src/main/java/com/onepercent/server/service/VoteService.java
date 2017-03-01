@@ -38,6 +38,10 @@ public class VoteService {
 		return voteDao.selectVoteResult();
 	}
 
+	public List<LinkedHashMap<String, Object>> selectQuestionList() throws Exception {
+		return voteDao.selectQuestionList();
+	}
+	
 	// 해당 날짜 이후로 투표 결과 가져오기
 	public List<LinkedHashMap<String, Object>> selectVoteResultSince(Map<String, Object> Map) throws Exception {
 		return voteDao.selectVoteResultSince(Map);
@@ -63,6 +67,10 @@ public class VoteService {
 		voteDao.deleteVote(map);
 	}
 
+	public void deleteQuestion(Map<String, Object> map) {
+		voteDao.deleteQuestion(map);
+	}
+	
 	// vote 한개 insert
 	public int insertVote(Map<String, Object> map) {
 		return voteDao.insertVote(map);

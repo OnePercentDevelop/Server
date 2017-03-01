@@ -42,7 +42,19 @@
 			ORDER BY vote_date ASC 
 		]]>
 	</select>
-	<select id="selectVoteResultSince" parameterType="hashmap" resultType="java.util.LinkedHashMap" >
+	
+	<select id="selectQuestionList" resultType="java.util.LinkedHashMap">
+		<![CDATA[
+			SELECT
+			    *
+			FROM
+				VoteResult
+			ORDER BY vote_date ASC 
+		]]>
+	</select>
+	
+	<select id="selectVoteResultSince" parameterType="hashmap"
+		resultType="java.util.LinkedHashMap">
 		<![CDATA[
 			SELECT
 			    *
@@ -53,7 +65,8 @@
 			ORDER BY vote_date ASC
 		]]>
 	</select>
-	<select id="selectTodayQuestion" parameterType="hashmap" resultType="java.util.LinkedHashMap" >
+	<select id="selectTodayQuestion" parameterType="hashmap"
+		resultType="java.util.LinkedHashMap">
 		<![CDATA[
 			SELECT
 			   vote_question, ex1_value, ex2_value, ex3_value, ex4_value
@@ -88,10 +101,10 @@
 			    )
        	END
 		]]>
-		
+
 	</insert>
-	
-<insert id="insertQuestion" parameterType="hashmap">
+
+	<insert id="insertQuestion" parameterType="hashmap">
 	<![CDATA[
 	    	IF EXISTS(
                 SELECT voteresult_id FROM VoteResult
@@ -122,7 +135,7 @@
 			    )
        	END
 		]]>
-		
+
 	</insert>
 
 	<update id="updateQuestionResult" parameterType="hashmap">
@@ -149,6 +162,14 @@
 		]]>
 	</delete>
 
+	<delete id="deleteQuestion" parameterType="hashmap">
+		<![CDATA[
+			DELETE FROM
+				VoteResult
+			WHERE
+				vote_date=#{vote_date}
+		]]>
+	</delete>
 
 
 
