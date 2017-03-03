@@ -20,7 +20,7 @@ import com.google.android.gcm.server.Sender;
 public class PushController {
 	@RequestMapping(value = "push.do", method = RequestMethod.GET)
 	public void sendPush(String msg) {
-		PushMessage("fLaai3aMEzE:APA91bE2VubLjsAKVuEIJZ1bBHHiZ7BEsvTDYqVydL9V3U6yxa8nNMHa6JPuG0yaoWxlUWWjg4hzNcYvci_f8UDNoKPpyyE62k62rZBFx7RMf90xAbx0lBragGDbrB_AMFWP0bote2ue", msg);
+		PushMessage("etnFS2aWZU0:APA91bF0ha1aguAH4mvhLI7XcLaAPZgHWVTUBOSsZtvUCzRGbik63OSooYMWBHqhmvMA1u-Z3dHDK1SjDpSMnlNyZZYSfABeZAj13k2ov7qwv4o_Js86SdKJc87JZEQiqQqP_qcva5OY", "hello");
 	}
 	public void PushMessage(String deviceToken, String sendMsg) { // 디바이스 토큰, 보낼
 																	// 메세지
